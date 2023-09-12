@@ -22,8 +22,8 @@ CREATE TABLE Product
     price DECIMAL(10,2) NOT NULL, -- DECIMAL(Max digits, digits after decimal point)
     stock INT NOT NULL DEFAULT 10,
     category_id INT,
-    -- VALIDATE price is decimal XXXXX
-    -- VALIDATE stock is numeric XXXXX
+    -- VALIDATE price is decimal -- IN SEQUELIZE
+    -- VALIDATE stock is numeric -- IN SEQUELIZE
     FOREIGN KEY (category_id) REFERENCES Category(id) ON DELETE CASCADE
 );
 
