@@ -7,6 +7,9 @@ const { DECIMAL } = require('sequelize');
 // Initialize Product model (table) by extending off Sequelize's Model class
 class Product extends Model { }
 
+// Add to support foreign key
+const Category = require('./Category');
+
 // set up fields and rules for Product model
 Product.init(
   {
@@ -47,6 +50,10 @@ Product.init(
     // category_id INT
     category_id: {
       type: DataTypes.INTEGER,
+      references: {
+        model: Category,
+        key: "id"
+      }
     },
 
   },

@@ -7,17 +7,36 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
-  const results = await Category.findAll();
+  let results = await Category.findAll();
+  for (let i=0; i<results.length; i++) {
+    results[i].products = [];
+    let cat_id = results[i].id;
+    let products = await Product.findAll({ where: { category_id: cat_id } });
+    console.log(products);
+    for (let prod of products) {
+      results[i].products.push(prod.dataValues);
+    }
+  }
   res.json(results);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id_from_query', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
+  const results = await Category.findOne({ where: { id: req.params.id_from_query } });
+  if (results === null) {
+    res.json("Not found");
+  } else {
+    res.json(results);
+  }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
+  // Receive JSON object with category_name as the key
+  const new_category = req.body.category_name;
+  const results = await Category.create({category_name: new_category});
+  res.json(results);
 });
 
 router.put('/:id', (req, res) => {
@@ -26,6 +45,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+
 });
 
 module.exports = router;
