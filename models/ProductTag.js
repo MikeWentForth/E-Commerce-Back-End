@@ -4,9 +4,7 @@ const sequelize = require('../config/connection');
 
 class ProductTag extends Model { }
 
-// Added for foreign key relationships
-const Product = require('./Product');
-const Tag = require('./Tag');
+
 
 ProductTag.init(
   {
@@ -23,9 +21,9 @@ ProductTag.init(
     // product_id INT NOT NULL,
     product_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
-        model: Product,
+        model: 'product',
         key: 'id'
       }
     },
@@ -33,8 +31,9 @@ ProductTag.init(
     // tag_id INT,  
     tag_id: {
       type: DataTypes.INTEGER,
+
       references: {
-        model: Tag,
+        model: 'tag',
         key: "id"
       }
     }

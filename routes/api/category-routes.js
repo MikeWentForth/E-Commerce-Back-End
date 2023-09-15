@@ -7,17 +7,26 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
-  let results = await Category.findAll();
-  for (let i=0; i<results.length; i++) {
-    results[i].products = [];
-    let cat_id = results[i].id;
-    let products = await Product.findAll({ where: { category_id: cat_id } });
-    console.log(products);
-    for (let prod of products) {
-      results[i].products.push(prod.dataValues);
-    }
+  
+  try {
+    let results = await Category.findAll({
+      include: [Product],
+    })
+    res.json(results);
+  } catch (err) {
+    res.status(500).json(err)
   }
-  res.json(results);
+  
+  // for (let i=0; i<results.length; i++) {
+  //   results[i].products = [];
+  //   let cat_id = results[i].id;
+  //   let products = await Product.findAll({ where: { category_id: cat_id } });
+  //   console.log(products);
+  //   for (let prod of products) {
+  //     results[i].products.push(prod.dataValues);
+  //   }
+  // }
+  // res.json(results);
 });
 
 router.get('/:id_from_query', async (req, res) => {
