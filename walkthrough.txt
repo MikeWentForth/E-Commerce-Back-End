@@ -1,0 +1,78 @@
+A walkthrough video that demonstrates the functionality of the e-commerce back end must be submitted, and a link to the video should be included in your README file.
+
+The walkthrough video must show all of the technical acceptance criteria being met.
+
+1) WHEN I add my database name, MySQL username, and MySQL password to an environment variable file
+   THEN I am able to connect to a database using Sequelize
+
+   On the video, show the .env file
+
+The walkthrough video must demonstrate how to create the schema from the MySQL shell.
+
+    MIGHT NEED to start mysql. From a terminal, type: mysql.server start
+    Open and show the file db/schema.sql (from VS Code)
+    Start a terminal from the Develop folder
+    Log into mysql from the terminal: mysql -u root -p (then enter password)
+    Type: source db/schema.sql
+
+The walkthrough video must demonstrate how to seed the database from the command line.
+
+    Start a terminal from the Develop folder
+    Type: npm run seed
+
+The walkthrough video must demonstrate how to start the application’s server.
+
+    Start a terminal from the Develop folder
+    Type: npm start  (or npm run start)
+
+The walkthrough video must demonstrate GET routes for all categories, all products, 
+and all tags being tested in Insomnia Core.
+
+    From Insomnia, create and send the following routes:
+    GET localhost:3001/api/categories
+    GET localhost:3001/api/products
+    GET localhost:3001/api/tags
+
+The walkthrough video must demonstrate GET routes for a single category, 
+a single product, and a single tag being tested in Insomnia Core.
+
+    From Insomnia, create and send the following routes:
+    GET localhost:3001/api/categories/1
+    GET localhost:3001/api/products/2
+    GET localhost:3001/api/tags/3
+
+The walkthrough video must demonstrate POST, PUT, and DELETE routes for 
+categories, products, and tags being tested in Insomnia Core.
+
+    From Insomnia, create and send the following routes:
+    POST localhost:3001/api/categories
+    {
+        category_name: "New Category Name"
+    }
+
+    POST localhost:3001/api/products
+    ???? -- they provided the code for this -- we haven't tested it
+
+    POST localhost:3001/api/tags
+    {
+        tag_name: "New Tag Name"
+    }
+
+
+    PUT localhost:3001/api/categories/1
+    {
+        category_name: "Update Category Name"
+    }
+
+    PUT localhost:3001/api/products/1
+    ???? -- they provided the code for this -- we haven't tested it
+
+    PUT localhost:3001/api/tags/1
+    {
+        tag_name: "Updated Tag Name"
+    }
+
+
+    DELETE localhost:3001/api/categories/1
+    DELETE localhost:3001/api/products/2
+    DELETE localhost:3001/api/tags/3
